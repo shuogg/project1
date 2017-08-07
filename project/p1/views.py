@@ -120,9 +120,12 @@ def login_v1(request):
 def logout_v1(request):
 	if request.user.is_authenticated():
 		out_user=request.user
-		print out_user,'start logout'
+		result = R_Head(200)
 		auth.logout(request)
-	return HttpResponse("%s Your Logout Success"%out_user)
+		return result
+	else:
+		result = R_Head(200)
+		return result
 
 
 def change_v1(request):
