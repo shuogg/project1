@@ -58,3 +58,67 @@ class Devices(models.Model):
 
 	class Meta:
 		db_table = 'Devices'
+
+
+class Product(models.Model):
+	product_id = models.IntegerField(unique=True,primary_key=True)  #产品ID
+	product_name = models.CharField(max_length=30)    #设备名称
+	owner = models.ForeignKey('p1.User',related_name='Product')  #用户
+	create_time = models.DateField()      #建立时间
+	class Meta:
+		db_table = 'Product'
+
+
+class Native_Host(models.Model):
+	idc_name = models.CharField(unique=True,primary_key=True,max_length=16)  #机房名
+	lan_ip = models.CharField(max_length=16,null = True)  #内网ip地址
+	wan_ip = models.CharField(max_length=16,null = True)  #外网ip地址
+	hid = models.CharField(max_length=30,null=True)          #机器hid
+	Cabinet = models.CharField(max_length=30,null=True)          #机柜
+	type =  models.CharField(max_length=16,null = True) #机器类型
+	cpu_type = models.CharField(max_length=30,null = True)    #CPU类型
+	cpu_number  = models.IntegerField(null=True) #CPU核心数量
+	memory_size = models.CharField(max_length=20,null = True)    #内存大小
+	disk_size = models.CharField(max_length=20,null = True)    #硬盘大小
+	disk_type= models.CharField(max_length=20,null = True)    #硬盘类型
+	create_time = models.DateField() 	#上架日期  
+
+
+	class Meta:
+		db_table = 'Native_Host'
+
+class Idc_Host(models.Model):
+	idc_name = models.CharField(unique=True,primary_key=True,max_length=16)  #机房名 #云名称
+	lan_ip = models.CharField(max_length=16,null = True)  #内网ip地址
+	wan_ip = models.CharField(max_length=16,null = True)  #外网ip地址
+	hid = models.CharField(max_length=30,null=True)          #机器hid
+	type =  models.CharField(max_length=16,null = True) #机器类型
+	cpu_type = models.CharField(max_length=30,null = True)    #CPU类型
+	cpu_number  = models.IntegerField(null=True) #CPU核心数量
+	memory_size = models.CharField(max_length=20,null = True)    #内存大小
+	disk_size = models.CharField(max_length=20,null = True)    #硬盘大小
+	disk_type= models.CharField(max_length=20,null = True)    #硬盘类型
+	create_time = models.DateField() 	#上架日期  
+
+
+	class Meta:
+		db_table = 'Idc_Host'
+
+
+class Product_Host(models.Model):
+	product_id = models.IntegerField(unique=True,primary_key=True)  #机房名
+	lan_ip = models.CharField(max_length=16,null = True)  #内网ip地址
+	wan_ip = models.CharField(max_length=16,null = True)  #外网ip地址
+	hid = models.CharField(max_length=30,null=True)          #机器hid
+	type =  models.IntegerField(null=True) #机器类型
+	cpu_type = models.CharField(max_length=30,null = True)    #CPU类型
+	cpu_number  = models.IntegerField(null=True) #CPU核心数量
+	memory_size = models.CharField(max_length=20,null = True)    #内存大小
+	disk_size = models.CharField(max_length=20,null = True)    #硬盘大小
+	disk_type= models.CharField(max_length=20,null = True)    #硬盘类型
+	create_time = models.DateField() 	#上架日期  
+	native_host =  models.CharField(max_length=30,null=True) #物理机ip
+
+	class Meta:
+		db_table = 'Product_Host'
+

@@ -32,30 +32,14 @@ def custom_exception_handler(exc, context):
 
     return response
 
-class AccountsList(APIView):
-	#permission_classes = (IsOwnerOrReadOnly,permissions.AllowAny)
-	permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,)	
-	def get(self, request,format=None):
-		accounts = Accounts.objects.all()
-		print accounts
-		serializer = AccountsSerializer(accounts, many=True)
-		return JsonResponse(data=serializer.data, code=status.HTTP_200_OK, message='') 
-		#return Response(serializer.data)
-	def post(self, request, format=None):
-		serializer = AccountsSerializer(data=request.data)
-		if serializer.is_valid():
-			serializer.save()
-			return JsonResponse(data=serializer.data, code=status.HTTP_200_OK, message='')
-			#return Response(serializer.data, status=status.HTTP_201_CREATED)
-		return JsonResponse(data=serializer.errors, code=status.HTTP_400_BAD_REQUEST, message='')
-		#return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 
 class UserList(LoginRequiredMixin,APIView):
 	login_url = '/login'
 	#permission_classes = (permissions.AllowAny)
-	permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,)
+	permission_classes = (permissions.IsAuthenticatedOrReadOnly)
 	def get(self, request,format=None):
 		print '哦哦'
 		users = User.objects.all()
@@ -75,7 +59,7 @@ class UserList(LoginRequiredMixin,APIView):
 
 
 
-class UserDetail(APIView):
+class UserDetail(LoginRequiredMixin,APIView):
 	#permission_classes = (permissions.AllowAny)
 	permission_classes = (IsOwnerOrReadOnly,permissions.IsAuthenticatedOrReadOnly,)
 	def get_object(self, pk):
@@ -116,18 +100,26 @@ class UserDetail(APIView):
 
 
 
-class TbNameList(APIView):
+
+
+class TbNameList(LoginRequiredMixin,APIView):
 	permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly)
 	def get(self, request,TbName,format=None):
-		try:
+		#try:
 			m0 =importlib.import_module('p1.tables')
 			TbClass = getattr(m0,TbName)
 			m1 =importlib.import_module('api.serializers')
 			SeClass = getattr(m1,TbName + 'Serializer')
 			TbObjects = TbClass.objects.all()
+			o = User.objects.get(name=request.user)
+			print o.Product.all()
+			#if TbName == 'Product':
+				#print TbName,request.user,User.objects.get(name = request.user).AccountID
+			#	TbObjects = TbClass.objects.filter(owner_id = User.objects.get(name = request.user).AccountID)
+			#	print TbObjects
 			serializer = SeClass(TbObjects, many=True)
 			return JsonResponse(data=serializer.data, code=status.HTTP_200_OK, message='') 
-		except:
+		#except:
 			return JsonResponse(data='', code='0', message='不存在') 
 
 	def post(self, request,TbName,format=None):
@@ -143,7 +135,7 @@ class TbNameList(APIView):
 		#except:
 		#	return JsonResponse(data='', code='0', message='不存在') 
 
-class TbNameDetail(APIView):
+class TbNameDetail(LoginRequiredMixin,APIView):
 	permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,)
 	def get_object(self, TbName,pk):
 		m0 =importlib.import_module('p1.tables')
@@ -178,6 +170,30 @@ class TbNameDetail(APIView):
 		user = self.get_object(TbName,pk)
 		user.delete()
 		return JsonResponse(data='delete ok', code=status.HTTP_200_OK, message='')
+
+
+class ProductList(LoginRequiredMixin,APIView):
+	permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly)
+	def get(self, request,format=None):
+		try:
+			TbName = 'Product'
+			m0 =importlib.import_module('p1.tables')
+			TbClass = getattr(m0,TbName)
+			m1 =importlib.import_module('api.serializers')
+			SeClass = getattr(m1,TbName + 'Serializer')
+			TbObjects = TbClass.objects.all()
+			o = User.objects.get(name=request.user)
+			TbObjects = o.Product.all()
+			#if TbName == 'Product':
+				#print TbName,request.user,User.objects.get(name = request.user).AccountID
+			#	TbObjects = TbClass.objects.filter(owner_id = User.objects.get(name = request.user).AccountID)
+			#	print TbObjects
+			serializer = SeClass(TbObjects, many=True)
+			return JsonResponse(data=serializer.data, code=status.HTTP_200_OK, message='') 
+		except:
+			return JsonResponse(data='', code='0', message='不存在') 
+
+
 
 
 '''

@@ -33,6 +33,7 @@ class UserManager(BaseUserManager):
         return user
 
 
+
 class User(AbstractBaseUser):
     '''用户表'''
     AccountID = models.AutoField(primary_key=True,unique=True)      #账号ID
@@ -69,6 +70,9 @@ class User(AbstractBaseUser):
 
     def get_short_name(self):
         return self.name
+
+    def get_id(self):
+        return self.AccountID
 
     def has_perm(self, perm, obj=None):
         return True
