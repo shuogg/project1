@@ -45,7 +45,7 @@ def check_user(request):
 		users = User.objects.filter(name = request.user) 
 		if users: 
 			result = R_Head(200)
-			print result
+			#print result
 			return result
 	print request.user
 	#return HttpResponse('0')

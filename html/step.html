@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo</title>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.js"></script>
+    <script src="js/jquery.steps.js"></script>
+    <link rel="stylesheet" href="css/jquery.steps.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../bootstrap/bootstrap-table/bootstrap-table.css">
+    <script src="../bootstrap/js/bootstrap.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <script src="../bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="../bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="../bootstrap/bootstrap-table/extensions/editable/bootstrap-table-editable.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+    <script src="http://momentjs.com/downloads/moment.js"></script>
+    <script>
+            cmd=''
+            function select(name) {
+                cmd = name
+                $("#cmd").html(cmd);
+            }
+
+
+    </script>
+
+
+
+</head>
+<body>
+<div id="example-tabs">
+    <h3>Keyboard</h3>
+        <section>
+            <table id="tab_cmd" class="table table-hover"><thead>
+            <tr><th style="" data-field="id" ><div class="fht-cell">看看</div></th><th style="" data-field="AccountID"><div class="th-inner ">用户ID</div><div class="fht-cell"></div></th><th style="" data-field="name"><div class="th-inner ">用户名</div><div class="fht-cell"></div></th><th style="" data-field="username"><div class="th-inner ">昵称</div><div class="fht-cell"></div></th><th style="" data-field="created_at"><div class="th-inner ">生日</div><div class="fht-cell"></div></th></tr></thead>
+                <tbody>
+                <tr data-index="0"><td style="">1</td> <td style=""><a href="javascript:void(0)" data-name="name" data-pk="undefined" data-value="xiaoshuo">xiaoshuo</a></td> <td style=""><a href="javascript:void(0)" data-name="username" data-pk="undefined" data-value="晓烁" class="editable editable-click">晓烁</a></td> <td style="">2017-08-15 10:38:57</td><td><button onclick="select('xiaoshuo')">执行</button></td></tr>
+                <tr data-index="0"><td style="">2</td> <td style=""><a href="javascript:void(0)" data-name="name" data-pk="undefined" data-value="xiaoshuo">xiaotian</a></td> <td style=""><a href="javascript:void(0)" data-name="username" data-pk="undefined" data-value="晓烁" class="editable editable-click">晓烁</a></td> <td style="">2017-08-15 10:38:57</td><td><button onclick="select('xiaotian')">执行</button></td></tr>
+
+                </tbody></table>
+   </section>
+    <h3>Other demos</h3>
+    <section>
+        姓名:<span id="cmd"></span>
+    </section>
+    <h3>Documentation</h3>
+    <section>
+        <p>For more information <a href="https://github.com/rstaib/jquery-steps/wiki">check out the documentation</a>!</p>
+    </section>
+    <h3>Download</h3>
+    <section>
+        <p>See on getting started!</p>
+    </section>
+</div>
+</body>
+<script>
+    $("#example-tabs").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        enableFinishButton: false,
+        enablePagination: false,
+        enableAllSteps: true,
+        titleTemplate: "#title#",
+        cssClass: "tabcontrol"
+    });
+
+
+</script>
+<script>
+    $("tb_user").click(function() {//为表格的行添加点击事件
+        var tr = $(this);//找到tr原色
+        var td = tr.find("td");//找到td元素
+        alert(td[0].innerHTML);//指定下标即可
+    })
+</script>
+
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>管理平台</title>
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../bootstrap/bootstrap-table/bootstrap-table.css">
+  <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.js"></script>
+  <script src="../bootstrap/js/bootstrap.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+  <script src="../bootstrap/bootstrap-table/bootstrap-table.js"></script>
+  <script src="../bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+  <script src="../bootstrap/bootstrap-table/extensions/editable/bootstrap-table-editable.js"></script>
+  <link rel="stylesheet" href="../layui/css/layui.css">
+  <script src="../layui/layui.js"></script>
+  <script src="http://momentjs.com/downloads/moment.js"></script>
+
+  <script src="../js/get_server_new.js"></script>
+  <script src="js/jquery.steps.js"></script>
+  <link rel="stylesheet" href="css/jquery.steps.css">
+  <script>
+      cmd=''
+      function select(name) {
+          cmd = name
+          $("#cmd").html(cmd);
+          $("#cmd1").html(cmd);
+          $("#example-tabs").steps('next');
+      }
+      function next() {
+          $("#example-tabs").steps('next');
+      }
+
+  </script>
+
+  <style>
+    /*  .header-top { position: relative;} */
+    .header-left {width: 50%; height:60px;float: left;padding-left: 14%}
+    .header-center {float: left; padding-top: 10px; width: 15%}
+    .header-right { position: absolute; right: 0px; width: 15%;}
+    .header-logo { margin-left:0px;height: 59px;}
+    .clear { clear: both;}
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+
+
+</head>
+<body>
+<div class="layui-header header header-demo header-top" style=";background-color: #393d49;" id="div1">
+  <ul class="layui-nav header-left"  lay-filter="">
+    <li class="layui-nav-item"><a href="">最新活动</a></li>
+    <li class="layui-nav-item layui-this"><a href="">产品</a></li>
+    <li class="layui-nav-item"><a href="">大数据</a></li>
+    <li class="layui-nav-item">
+      <a href="javascript:;">解决方案</a>
+      <dl class="layui-nav-child">
+        <dd><a id='a1' href="http://www.baidu.com">个人设置</a></dd>
+        <dd><a href="javascript:;">修改密码</a></dd>
+        <dd><a href="javascript:;">电商平台</a></dd>
+      </dl>
+    </li>
+
+  </ul>
+  <ul>
+    <div class="dropdown header-center">
+      <button class="btn btn-default dropdown-toggle"  id="p_btn" style="width:80%;" data-toggle="dropdown">
+        <span class="caret">
+        </span></button>
+      <ul class="dropdown-menu" id="p_ul">
+      </ul>
+    </div>
+  </ul>
+  <ul class="layui-nav header-right" id="vname">
+
+  </ul>
+</div>
+<div class="both"></div>
+<div class="row" style="width: 100%">
+<div class="col-md-2">
+<ul class="layui-nav layui-nav-tree" lay-filter="test">
+<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+  <li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">业务管理</a>
+    <dl class="layui-nav-child">
+      <dd><a href="javascript:;">区组管理</a></dd>
+      <dd><a href="javascript:;">机器管理</a></dd>
+    </dl>
+  </li>
+  <li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">操作平台</a>
+    <dl class="layui-nav-child">
+      <dd><a href="javascript:;">区组操作</a></dd>
+      <dd><a  class="layui-this" href="host_job.html">机器操作</a></dd>
+    </dl>
+  </li>
+  <li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">用户管理</a>
+    <dl class="layui-nav-child">
+      <dd><a href="user_serch.html">用户搜索</a></dd>
+      <dd><a href="user_serch_ad.html">用户查询</a></dd>
+      <dd><a href="user_register.html">用户注册</a></dd>
+      <!-- <dd><a href="">电商平台</a></dd> -->
+    </dl>
+  </li>
+  <li class="layui-nav-item"><a href="javascript:;">大数据</a></li>
+</ul>
+</div>
+<div class="col-md-10" style="margin-top: 20px;">
+  <div id="example-tabs">
+    <h3>选择项目应用</h3>
+    <section>
+      <table class="layui-table" lay-even="" lay-skin="nob"  >
+        <thead>
+        <tr>
+          <th>项目ID</th>
+          <th>项目名称</th>
+          <th>命令</th>
+          <th>语言</th>
+          <th>最后修改时间</th>
+          <th>所有者</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="tab_cmd">
+        </tbody>
+      </table>
+
+    </section>
+    <h3>参数确认</h3>
+    <section>
+      命令:<span id="cmd"></span>
+      <button onclick="next()">下一步</button>
+    </section>
+    <h3>选择目标</h3>
+    <section>
+      <div id="host_tree">
+
+      </div>
+    </section>
+    <h3>开始执行</h3>
+    <section>
+      确认命令:<span id="cmd1"></span>
+      <hr>
+      服务器地址:<span id="host_ip"></span>
+      <hr>
+      <button >开始执行</button>
+    </section>
+  </div>
+</div>
+ 
+<script>
+//注意：导航 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function(){
+  var element = layui.element();
+  
+  //…
+});
+
+
+
+</script>
+
+      <script>
+      $("#example-tabs").steps({
+          headerTag: "h3",
+          bodyTag: "section",
+          transitionEffect: "slideLeft",
+          enableFinishButton: true,
+          enablePagination: true,
+          enableAllSteps: true,
+          titleTemplate: "#title#",
+          cssClass: "tabcontrol",
+      });
+  </script>
+  <script src="js/product.js"></script>
+  <script src="js/set_product.js"></script>
+  <script>
+     now_projectid = getCookie('now_projectid')
+      function S_cmd(now_projectid) {
+          $.ajax({
+              cache: true,
+              headers: header,
+              type: "get",
+              datatype:"json",
+              url: reserver + 'api/v1/Product_cmd/id/' + now_projectid + '/',
+              async: false,
+              xhrFields: {
+                  withCredentials: true
+              },
+              crossDomain: true,
+              error: function (request) {
+                  alert("Connection error");
+              },
+              success: function (data) {
+                  data = data.data
+                  var html = '';
+                  for (var i = 0; i < data.length; i++) {
+                      html += '<tr>'
+                      html += '<td>' + data[i].product_id  + '</td>';
+                      html += '<td>' + data[i].product_name + '</td>';
+                      html += '<td>' + data[i].cmd_name + '</td>';
+                      html += '<td>' + data[i].cmd_type + '</td>';
+                      html += '<td>' + moment(data[i].last_time).format("YYYY-MM-DD h:mm:ss"); + '</td>';
+                      html += '<td>' + data[i].owner + '</td>';
+                      html += '<td>' + '<button onclick="select(' + "'" + data[i].cmd_name + "'" +  ')">执行</button>' + '</td>';
+                      html += '</tr>'
+                  }
+                  $('#tab_cmd').html(html);
+
+
+              }
+          });
+      }
+      S_cmd(now_projectid)
+  </script>
+  <script>
+      now_projectid = getCookie('now_projectid')
+      function S_host(now_projectid) {
+          $.ajax({
+              cache: true,
+              headers: header,
+              type: "get",
+              datatype:"json",
+              url: reserver + 'api/v1/Product_Host/id/' + now_projectid + '/',
+              async: false,
+              xhrFields: {
+                  withCredentials: true
+              },
+              crossDomain: true,
+              error: function (request) {
+                  alert("Connection error");
+              },
+              success: function (data) {
+                  data = data.data
+                  var html = '';
+                  for (var i = 0; i < data.length; i++) {
+                      html += '<input type="checkbox" name="host" value="' + data[i].lan_ip +  '">' + data[i].lan_ip + '</input>';
+                  }
+                  html +='<button  onclick="chk()">打印选择</button>'
+                  $('#host_tree').html(html);
+
+
+              }
+          });
+      }
+      function chk(){
+          var obj=document.getElementsByName('host'); //选择所有name="'test'"的对象，返回数组
+//取到对象数组后，我们来循环检测它是不是被选中
+          var s='';
+          for(var i=0; i<obj.length; i++){
+              if(obj[i].checked) s+=obj[i].value; //如果选中，将value添加到变量s中
+          }
+//那么现在来检测s的值就知道选中的复选框的值了
+          alert(s==''?'你还没有选择任何内容！':s);
+          $('#host_ip').html(s);
+          next()
+      }
+
+      S_host(now_projectid)
+  </script>
+</div>
+
+
+</body>
+</html>
+
