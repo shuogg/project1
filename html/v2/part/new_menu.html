@@ -1,0 +1,26 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" ng-controller="MenuCtrl">
+    <div class="panel panel-default" ng-repeat="parent in groups">
+        <div class="panel-heading" role="tab"  id="i{{parent.module}}">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{parent.module}}" aria-expanded="false" aria-controls="{{parent.module}}">
+                    <span>{{parent.name}}</span>
+                </a>
+            </h4>
+        </div>
+        <div id="{{parent.module}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="i{{parent.module}}">
+            <div class="panel-body">
+                <ul class="nav nav-list ng-scope">
+                    <li ng-repeat-start="page in parent.childs" ></li>
+                    <li><a  href="#{{page.module}}"  ng-click="select(parent.name,page.name)">{{page.name}}</a> </li>
+                    <li ng-repeat-end></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+<div class="row" style="margin-top: 30px;">
+    <form role="form" class="ng-valid ng-dirty">
+        <div class="form-group col-lg-2">
+            <div class="input-group">
+                <input type="text" class="form-control ng-pristine ng-valid" ng-model="serverCount" placeholder="选择服务器" disabled="">
+                <span class="input-group-btn">
+        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal"><span class="caret"></span></button>
+    </span>
+            </div>
+        </div>
+
+        <div class="col-lg-2" style="width:35%">
+            <div class="form-group">
+                <div class="col-lg-10">
+                    <input type="text" class="form-control ng-valid ng-dirty" ng-model="restart_time" placeholder="重启时间">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group col-lg-4">
+            <button type="button" class="btn btn-info ng-binding" ng-click="check()">检查</button>
+        </div>
+
+
+    </form>
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" ng-controller="SServerGroup">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">
+                    Close</span></button>
+                <h4 class="modal-title">模态弹出窗标题</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                <div class="form-group">
+                    <label class="ng-binding">服务器</label>
+                    <dl ng-repeat="group in servergroup">
+                        <dt>
+                            <input type="checkbox" value="{{group.opgameid}}" ng-model="$serverip" class="ng-pristine ng-valid">
+                            {{group.name}}(全选)
+                            <i class="icon-plus"></i>
+                            <br>
+                            <label class="checkbox-inline ng-scope ng-binding" ng-repeat="server in servers" ng-if="server.serverStatus >= 2 &amp;&amp; server.opgameid == group.opgameid" >
+                            <input type="checkbox" value="{{server.ip}}" ng-checked="server.ip" name="server_ip" id="server_ip_{{server.ip}}"> {{server.lan_ip}}
+                            </label>
+                            <!--
+                            <label class="checkbox-inline ng-scope ng-binding" ng-repeat="server in servers" ng-if="server.serverStatus >= 2 &amp;&amp; server.opgameid == group.opgameid">
+                                <input type="checkbox" value="{{server.ip}}" ng-checked="server.ip" name="server_ip" id="server_ip_{{server.ip}}"> {{server.ip}}
+                            </label>
+                            -->
+                        </dt>
+                    </dl>
+                </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+
+</div>

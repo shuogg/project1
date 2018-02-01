@@ -1,9 +1,12 @@
 /**
  * Created by liushuo on 2017/8/1.
  */
-var reserver = 'http://www.91ox.cn:8000/'
-var httpserver = 'http://www.91ox.cn/'
+var reserver = 'http://192.168.137.1:8000/'
+var httpserver = 'http://192.168.137.1:90/'
 
+function myrefresh() {
+    window.location.reload();
+}
 
 function setCookie(name,value)
 {
@@ -39,7 +42,6 @@ function getCookie(name) {
 }
 
 var csrftoken = getCookie('csrftoken');
-
 
 header = {'X-CSRFToken': csrftoken }
 
@@ -122,7 +124,7 @@ function   post_req(ojburl,data,dataType,message) {
             result =  false
         },
         success: function(data){
-            if (data.status == "200")
+            if (data.status == "200" || data.code == 200)
             {
                 alert(message + '成功')
                 result = true;
@@ -132,6 +134,7 @@ function   post_req(ojburl,data,dataType,message) {
                 alert(message + '失败')
                 result = false;
             }
+
         }
 
 
@@ -139,6 +142,7 @@ function   post_req(ojburl,data,dataType,message) {
     return result;
 
 }
+
 
 
 function check_login() {
@@ -179,7 +183,31 @@ function CUser_Lay() {
     }
 }
 
+function CProduct_Lay() {
+    result = post_req('api/v1/Product/',$('#CProduct_Lay').serialize(),'json','新建项目')
+    if (result) {
+        layer.closeAll()
+        myrefresh()
+    }
+}
 
+function CServer_Lay() {
+    alert($('#CProductServer_Lay').serialize())
+    result = post_req('api/v1/Product_Server/',$('#CProductServer_Lay').serialize(),'json','新建项目')
+    if (result) {
+        layer.closeAll()
+        myrefresh()
+    }
+}
+
+function CProductHost_Lay() {
+    alert($('#CProductHost_Lay').serialize())
+    result = post_req('api/v1/Product_Host/',$('#CProductHost_Lay').serialize(),'json','新建服务器')
+    if (result) {
+        layer.closeAll()
+        myrefresh()
+    }
+}
 
 
 

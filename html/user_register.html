@@ -17,7 +17,7 @@
   <script src="../bootstrap/bootstrap-table/extensions/editable/bootstrap-table-editable.js"></script>
   <link rel="stylesheet" href="../layui/css/layui.css">
   <script src="../layui/layui.js"></script>
-  <script src="http://momentjs.com/downloads/moment.js"></script>
+  <script src="js/moment.js"></script>
 
 
   <script src="../js/user_table.js"></script>
@@ -71,26 +71,32 @@
 <div class="col-md-2">
 <ul class="layui-nav layui-nav-tree" lay-filter="test">
 <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-  <li class="layui-nav-item layui-nav-itemed">
-    <a href="javascript:;">业务管理</a>
+  <li class="layui-nav-item">
+    <a href="javascript:;">产品管理</a>
     <dl class="layui-nav-child">
-      <dd><a href="javascript:;">区组管理</a></dd>
-      <dd><a href="javascript:;">机器管理</a></dd>
+      <dd><a href="product_serch.html">产品查询</a></dd>
     </dl>
   </li>
-  <li class="layui-nav-item layui-nav-itemed">
+  <li class="layui-nav-item">
+    <a href="javascript:;">业务管理</a>
+    <dl class="layui-nav-child">
+      <dd><a href="product_server.html">区组管理</a></dd>
+      <dd><a href="product_host.html">机器管理</a></dd>
+    </dl>
+  </li>
+  <li class="layui-nav-item">
     <a href="javascript:;">操作平台</a>
     <dl class="layui-nav-child">
-      <dd><a href="javascript:;">区组操作</a></dd>
-      <dd><a href="javascript:;">机器操作</a></dd>
+      <dd><a href="product_job.html">区组操作</a></dd>
+      <dd><a href="host_job.html">机器操作</a></dd>
     </dl>
   </li>
   <li class="layui-nav-item layui-nav-itemed">
     <a href="javascript:;">用户管理</a>
     <dl class="layui-nav-child">
-      <dd><a href="./user_serch.html">用户搜索</a></dd>
-      <dd><a href="./user_serch_ad.html">用户查询</a></dd>
-      <dd  class="layui-this"><a href="./user_register.html">用户注册</a></dd>
+      <dd><a href="user_serch.html">用户搜索</a></dd>
+      <dd><a href="user_serch_ad.html">用户查询</a></dd>
+      <dd  class="layui-this"><a href="user_register.html">用户注册</a></dd>
       <!-- <dd><a href="">电商平台</a></dd> -->
     </dl>
   </li>

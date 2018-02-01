@@ -1,0 +1,14 @@
+<!--
+<div class="col-sm-2 col-sm-offset-6" ng-controller="SlistCtrl">
+    <select ng-init="select1=qudao['请选择渠道']"  ng-model="select1" ng-options="x for (x, y) in qudao"></select>
+    <select ng-init="select2=select1.name"  ng-model="select2" ng-options="x for x in select1"></select>
+</div>
+-->
+<div class="col-md-12" ng-controller="SlistCtrl" style="margin-top: 20px">
+    <div class="col-sm-2 col-sm-offset-6" >
+        <select class="form-control" ng-init="select1=qudao['请选择渠道']"  ng-model="select1" ng-options="x for (x, y) in qudao"></select>
+    </div>
+    <div class="col-sm-2">
+    <select class="form-control" ng-init="select2=select1[0]"  ng-model="select2" ng-options="x for x in select1"></select>
+    </div>
+</div>

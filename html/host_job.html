@@ -17,24 +17,12 @@
   <script src="../bootstrap/bootstrap-table/extensions/editable/bootstrap-table-editable.js"></script>
   <link rel="stylesheet" href="../layui/css/layui.css">
   <script src="../layui/layui.js"></script>
-  <script src="http://momentjs.com/downloads/moment.js"></script>
+  <script src="js/moment.js"></script>
 
   <script src="../js/get_server_new.js"></script>
   <script src="js/jquery.steps.js"></script>
   <link rel="stylesheet" href="css/jquery.steps.css">
-  <script>
-      cmd=''
-      function select(name) {
-          cmd = name
-          $("#cmd").html(cmd);
-          $("#cmd1").html(cmd);
-          $("#example-tabs").steps('next');
-      }
-      function next() {
-          $("#example-tabs").steps('next');
-      }
 
-  </script>
 
   <style>
     /*  .header-top { position: relative;} */
@@ -86,21 +74,27 @@
 <div class="col-md-2">
 <ul class="layui-nav layui-nav-tree" lay-filter="test">
 <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-  <li class="layui-nav-item layui-nav-itemed">
+  <li class="layui-nav-item">
+    <a href="javascript:;">产品管理</a>
+    <dl class="layui-nav-child">
+      <dd><a href="product_serch.html">产品查询</a></dd>
+    </dl>
+  </li>
+  <li class="layui-nav-item">
     <a href="javascript:;">业务管理</a>
     <dl class="layui-nav-child">
-      <dd><a href="javascript:;">区组管理</a></dd>
-      <dd><a href="javascript:;">机器管理</a></dd>
+      <dd><a href="product_server.html">区组管理</a></dd>
+      <dd><a href="product_host.html">机器管理</a></dd>
     </dl>
   </li>
   <li class="layui-nav-item layui-nav-itemed">
     <a href="javascript:;">操作平台</a>
     <dl class="layui-nav-child">
-      <dd><a href="javascript:;">区组操作</a></dd>
+      <dd><a href="product_server.html">区组操作</a></dd>
       <dd><a  class="layui-this" href="host_job.html">机器操作</a></dd>
     </dl>
   </li>
-  <li class="layui-nav-item layui-nav-itemed">
+  <li class="layui-nav-item">
     <a href="javascript:;">用户管理</a>
     <dl class="layui-nav-child">
       <dd><a href="user_serch.html">用户搜索</a></dd>
@@ -150,7 +144,13 @@
       <hr>
       服务器地址:<span id="host_ip"></span>
       <hr>
-      <button >开始执行</button>
+      <button id="commit" onclick="commit()">开始执行</button>
+
+      <hr>
+      执行结果:
+      <div id="info"></div>
+
+
     </section>
   </div>
 </div>
@@ -220,51 +220,7 @@ layui.use('element', function(){
       }
       S_cmd(now_projectid)
   </script>
-  <script>
-      now_projectid = getCookie('now_projectid')
-      function S_host(now_projectid) {
-          $.ajax({
-              cache: true,
-              headers: header,
-              type: "get",
-              datatype:"json",
-              url: reserver + 'api/v1/Product_Host/id/' + now_projectid + '/',
-              async: false,
-              xhrFields: {
-                  withCredentials: true
-              },
-              crossDomain: true,
-              error: function (request) {
-                  alert("Connection error");
-              },
-              success: function (data) {
-                  data = data.data
-                  var html = '';
-                  for (var i = 0; i < data.length; i++) {
-                      html += '<input type="checkbox" name="host" value="' + data[i].lan_ip +  '">' + data[i].lan_ip + '</input>';
-                  }
-                  html +='<button  onclick="chk()">打印选择</button>'
-                  $('#host_tree').html(html);
-
-
-              }
-          });
-      }
-      function chk(){
-          var obj=document.getElementsByName('host'); //选择所有name="'test'"的对象，返回数组
-//取到对象数组后，我们来循环检测它是不是被选中
-          var s='';
-          for(var i=0; i<obj.length; i++){
-              if(obj[i].checked) s+=obj[i].value; //如果选中，将value添加到变量s中
-          }
-//那么现在来检测s的值就知道选中的复选框的值了
-          alert(s==''?'你还没有选择任何内容！':s);
-          $('#host_ip').html(s);
-          next()
-      }
-
-      S_host(now_projectid)
-  </script>
+   <script src="js/host_job.js"></script>
 </div>
 
 

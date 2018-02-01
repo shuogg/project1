@@ -1,15 +1,13 @@
 /**
  * Created by liushuo on 2017/8/2.
  */
-var reserver = 'http://www.91ox.cn:8000/'
-var httpserver = 'http://www.91ox.cn/'
+var reserver = 'http://192.168.137.1:8000/'
+var httpserver = 'http://192.168.137.1:90/'
 
 
 now_projectid = getCookie('now_projectid')
 
-function myrefresh() {
-    window.location.reload();
-}
+
 
 
 function  get_data(objurl,dataType,message) {
@@ -62,10 +60,27 @@ $('#tb_Product_Host').bootstrapTable({
         },
         {
         field: 'product_id',
-        title: 'Product ID'
+        title: 'Product ID',
+            sortable : true,
+            editable: {
+                type: 'text',
+                title: '项目ID',
+                validate: function (v) {
+                    if (!v) return '项目ID不能为空';
+
+                }
+        }
     }, {
         field: 'product_name',
-        title: 'Product Name'
+        title: 'Product Name',
+            editable: {
+                type: 'text',
+                title: '项目名称',
+                validate: function (v) {
+                    if (!v) return '项目名称不能为空';
+
+                }
+            }
     }, {
         field: 'hid',
         title: 'HID'
@@ -83,9 +98,9 @@ $('#tb_Product_Host').bootstrapTable({
             title:'内存',
             editable: {
                 type: 'text',
-                title: '内存',
+                title: '内存大小',
                 validate: function (v) {
-                    if (!v) return '内存不能为空';
+                    if (!v) return '内存大小不能为空';
 
                 }
             }
@@ -275,6 +290,7 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
         }
 
         ,C_Host: function(){
+            var html = '<div style="margin: 50px auto; width: 50%"> <form class="layui-form layui-form-pane" id="CProductHost_Lay"> <div class="layui-form-item" > <label class="layui-form-label">产品ID</label> <div class="layui-input-block"> <input type="text" name="product_id" lay-verify="required" placeholder="请输入产品ID" autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item" > <label class="layui-form-label">产品名称 </label> <div class="layui-input-block"> <input type="text" name="product_name" lay-verify="required" placeholder="请输入产品名称 " autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item" > <label class="layui-form-label">内网ip地址</label> <div class="layui-input-block"> <input type="text" name="lan_ip" lay-verify="required" placeholder="请输入内网ip地址" autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item" > <label class="layui-form-label">外网ip地址</label> <div class="layui-input-block"> <input type="text" name="wan_ip" lay-verify="required" placeholder="请输入外网ip地址" autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item" > <label class="layui-form-label">机器hid</label> <div class="layui-input-block"> <input type="text" name="hid" lay-verify="required" placeholder="请输入机器hid" autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item" > <label class="layui-form-label">机器类型</label> <div class="layui-input-block"> <input type="text" name="type" lay-verify="required" placeholder="请输入机器类型" autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item" > <label class="layui-form-label">CPU类型</label> <div class="layui-input-block"> <input type="text" name="cpu_type" lay-verify="required" placeholder="请输入CPU类型" autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item" > <label class="layui-form-label">CPU数量</label> <div class="layui-input-block"> <input type="text" name="cpu_number" lay-verify="required" placeholder="请输入CPU数量" autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item" > <label class="layui-form-label">内存大小</label> <div class="layui-input-block"> <input type="text" name="memory_size" lay-verify="required" placeholder="请输入内存大小" autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item" > <label class="layui-form-label">硬盘大小</label> <div class="layui-input-block"> <input type="text" name="disk_size" lay-verify="required" placeholder="请输入硬盘大小" autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item" > <label class="layui-form-label">硬盘类型</label> <div class="layui-input-block"> <input type="text" name="disk_type" lay-verify="required" placeholder="请输入硬盘类型" autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item" > <label class="layui-form-label">上架日期</label> <div class="layui-input-block"> <input type="text" name="create_time" lay-verify="required" placeholder="请输入上架日期" autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item" > <label class="layui-form-label">物理机ip</label> <div class="layui-input-block"> <input type="text" name="native_host" lay-verify="required" placeholder="请输入物理机ip" autocomplete="off" class="layui-input"> </div> </div> <div class="layui-form-item"> <div class="layui-input-block"> <input type="button" onclick="CProductHost_Lay()" class="layui-btn layui-btn-primary" value="提交"> <input type="reset" class="layui-btn layui-btn-primary"></input> </div> </div></form> </div>'
             //示范一个公告层
             layer.open({
                 type: 1
@@ -286,7 +302,7 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
                 ,btn: ['火速围观', '残忍拒绝']
                 ,moveType: 1 //拖拽模式，0或者1
                 /* ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">你知道吗？亲！<br>layer ≠ layui<br><br>layer只是作为Layui的一个弹层模块，由于其用户基数较大，所以常常会有人以为layui是layerui<br><br>layer虽然已被 Layui 收编为内置的弹层模块，但仍然会作为一个独立组件全力维护、升级。<br><br>我们此后的征途是星辰大海 ^_^</div> */
-                ,content:'<div style="margin: 50px auto; width: 50%"><form class="layui-form layui-form-pane" id="CProductHost_Lay"> <div class="layui-form-item" > <label class="layui-form-label">用户名</label> <div class="layui-input-inline"> <input type="text" name="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"> <!-- input type="text" name="title" autocomplete="off" placeholder="请输入登录名" class="layui-input" --> </div> </div> <div class="layui-form-item"> <label class="layui-form-label">密码</label> <div class="layui-input-inline"> <input type="password" name="password1" placeholder="请输入密码" autocomplete="off" class="layui-input"> </div> <div class="layui-form-mid layui-word-aux">请务必填写用户名</div> </div> <div class="layui-form-item"> <label class="layui-form-label">确认密码</label> <div class="layui-input-inline"> <input type="password" name="password2" placeholder="请输入密码" autocomplete="off" class="layui-input"> </div> <div class="layui-form-mid layui-word-aux">请务必填写用户名</div> </div> <div class="layui-form-item"> <label class="layui-form-label">所属项目</label> <div class="layui-input-inline"> <input type="text" name="project" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"> <!-- input type="text" name="title" autocomplete="off" placeholder="请输入登录名" class="layui-input" --> </div> </div> <div class="layui-form-item"> <div class="layui-input-block"> <input type="button" onclick="CUser_Lay()" class="layui-btn layui-btn-primary" value="提交"></input> <input type="reset" class="layui-btn layui-btn-primary"></input> </div> </div> </form></div>'
+                ,content:html
                 ,success: function(layero){
                     var btn = layero.find('.layui-layer-btn');
                     btn.css('text-align', 'center');

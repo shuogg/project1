@@ -1,8 +1,8 @@
 /**
  * Created by liushuo on 2017/8/2.
  */
-var reserver = 'http://www.91ox.cn:8000/'
-var httpserver = 'http://www.91ox.cn/'
+var reserver = 'http://192.168.137.1:8000/'
+var httpserver = 'http://192.168.137.1:90/'
 
 function myrefresh() {
     window.location.reload();

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"   ng-app="myApp" class="ng-scope">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../css/jquery.steps.css">
+    <script src="../bootstrap/js/bootstrap.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+    <script src="js/index.js"></script>
+
+
+</head>
+<body ng-controller="AppCtrl" class="ng-scope">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header" style="height: 80px;background-color: #FFFFFF">
+            <!-- logo -->
+            <a href="#"  class="navbar-brand" style="padding: 5px;">
+                <img src="../img/logo1.jpg">
+            </a>
+        </div>
+
+    </div>
+
+
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 well">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <span class="ng-binding">服务器管理</span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <ul class="nav nav-list ng-scope">
+                                <li><a class="ng-binding" href="#/whilte">白名单管理</a> </li>
+                                <li><a class="ng-binding" href="#/smanager">服务器管理</a></li>
+                            </ul>
+    </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <span class="ng-binding">操作平台</span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <ul class="nav nav-list ng-scope">
+                                <li><a class="ng-binding" href="#/servera">服务器操作</a> </li>
+                                <li><a class="ng-binding" href="#/producta">区组操作</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <span class="ng-binding">日志审计</span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                        <ul class="nav nav-list ng-scope">
+                            <li><a class="ng-binding" href="#/logselects">日志分析</a> </li>
+                            <li><a class="ng-binding" href="#/logs1">日志查询</a> </li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="row ng-scope" ng-include  src="'part/breadcrumb.html'">
+            </div>
+            <!-- div ng-view></div> -->
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>
