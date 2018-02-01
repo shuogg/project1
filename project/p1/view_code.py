@@ -32,6 +32,7 @@ class JsonResponse(Response):
             raise AssertionError(msg)
 
         self.data = {'code': code, 'message': message, 'data': data}
+        #self.data = data
         self.template_name = template_name
         self.exception = exception
         self.content_type = content_type
@@ -43,7 +44,7 @@ class JsonResponse(Response):
 
 def R_Head(code):
     response = HttpResponse(json.dumps({"status": code})) 
-    response["Access-Control-Allow-Origin"] = "http://www.91ox.cn" 
+    response["Access-Control-Allow-Origin"] = "http://192.168.137.1" 
     response["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS" 
     response["Access-Control-Max-Age"] = "1000"
     response["Access-Control-Allow-Headers"] = "*" 

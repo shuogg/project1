@@ -58,3 +58,122 @@ class Devices(models.Model):
 
 	class Meta:
 		db_table = 'Devices'
+
+
+class Product(models.Model):
+	product_id = models.IntegerField(unique=True,primary_key=True)  #产品ID
+	product_name = models.CharField(max_length=30)    #设备名称
+	owner = models.ForeignKey('p1.User',related_name='Product')  #用户
+	create_time = models.DateField(auto_now_add=True)      #建立时间
+	class Meta:
+		db_table = 'Product'
+
+
+class Native_Host(models.Model):
+	idc_name = models.CharField(unique=True,primary_key=True,max_length=16)  #机房名
+	lan_ip = models.CharField(max_length=16,null = True)  #内网ip地址
+	wan_ip = models.CharField(max_length=16,null = True)  #外网ip地址
+	hid = models.CharField(max_length=30,null=True)          #机器hid
+	Cabinet = models.CharField(max_length=30,null=True)          #机柜
+	type =  models.CharField(max_length=16,null = True) #机器类型
+	cpu_type = models.CharField(max_length=30,null = True)    #CPU类型
+	cpu_number  = models.IntegerField(null=True) #CPU核心数量
+	memory_size = models.CharField(max_length=20,null = True)    #内存大小
+	disk_size = models.CharField(max_length=20,null = True)    #硬盘大小
+	disk_type= models.CharField(max_length=20,null = True)    #硬盘类型
+	create_time = models.DateField() 	#上架日期  
+
+
+	class Meta:
+		db_table = 'Native_Host'
+
+class Idc_Host(models.Model):
+	idc_name = models.CharField(unique=True,primary_key=True,max_length=16)  #机房名 #云名称
+	lan_ip = models.CharField(max_length=16,null = True)  #内网ip地址
+	wan_ip = models.CharField(max_length=16,null = True)  #外网ip地址
+	hid = models.CharField(max_length=30,null=True)          #机器hid
+	type =  models.CharField(max_length=16,null = True) #机器类型
+	cpu_type = models.CharField(max_length=30,null = True)    #CPU类型
+	cpu_number  = models.IntegerField(null=True) #CPU核心数量
+	memory_size = models.CharField(max_length=20,null = True)    #内存大小
+	disk_size = models.CharField(max_length=20,null = True)    #硬盘大小
+	disk_type= models.CharField(max_length=20,null = True)    #硬盘类型
+	create_time = models.DateField() 	#上架日期  
+
+
+	class Meta:
+		db_table = 'Idc_Host'
+
+
+class Product_Host(models.Model):
+	product_id = models.IntegerField(null = False)  #产品ID
+	product_name = models.CharField(max_length=16,null = True) #产品名称
+	lan_ip = models.CharField(max_length=16,null = True)  #内网ip地址
+	wan_ip = models.CharField(max_length=16,null = True)  #外网ip地址
+	hid = models.CharField(max_length=30,primary_key=True)          #机器hid
+	type =  models.CharField(max_length=16,null=True) #机器类型
+	cpu_type = models.CharField(max_length=30,null = True)    #CPU类型
+	cpu_number  = models.IntegerField(null=True) #CPU核心数量
+	memory_size = models.CharField(max_length=20,null = True)    #内存大小
+	disk_size = models.CharField(max_length=20,null = True)    #硬盘大小
+	disk_type= models.CharField(max_length=20,null = True)    #硬盘类型
+	create_time = models.DateField() 	#上架日期  
+	native_host =  models.CharField(max_length=30,null=True) #物理机ip
+
+	def __unicode__(self):
+		return self.hid
+
+	class Meta:
+		db_table = 'Product_Host'
+
+
+class Product_Server(models.Model):
+	server_id = models.CharField(max_length=16,null = False,primary_key=True)  #区组ID
+	server_name = models.CharField(max_length=16,null = True) #区组名称
+	server_type = models.CharField(max_length=16,null = True)  #区组类型
+	server_ip =  models.CharField(max_length=30,null=True) #区组ip
+	product_id = models.IntegerField(null = False)
+	product_name = models.CharField(max_length=16,null = True)  #区组对应的产品
+	hid = models.CharField(max_length=30)          #机器hid
+	open_time = models.DateField() #开服时间
+	created_at = models.DateTimeField(auto_now_add=True)
+
+
+	def __unicode__(self):
+		return self.server_id
+
+	class Meta:
+		db_table = 'Product_Server'
+
+
+
+
+class Product_Agent(models.Model):
+	product_id = models.IntegerField(null = False)  #产品ID
+	product_name = models.CharField(max_length=16,null = True) #产品名称
+	hid = models.CharField(max_length=30,primary_key=True)          #机器hid
+	agentname =  models.CharField(max_length=40,null=True) #agent name
+	status = models.IntegerField(default=0)    #是否在线
+	created_at = models.DateTimeField(auto_now_add=True)
+
+	def __unicode__(self):
+		return self.hid
+
+	class Meta:
+		db_table = 'Product_Agent'
+
+
+
+class Product_cmd(models.Model):
+	product_id = models.IntegerField(null = False)  #产品ID
+	product_name = models.CharField(max_length=16,null = True) #产品名称
+	cmd_name = models.CharField(max_length=16,null = True)  #内网ip地址
+	cmd_type = models.CharField(max_length=16,null = True)
+	owner = models.CharField(max_length=16,null = True)  #外网ip地址
+	last_time = models.DateField() 
+
+	def __unicode__(self):
+		return self.cmd_name
+
+	class Meta:
+		db_table = 'Product_cmd'
